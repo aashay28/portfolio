@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  easeInOut,
+} from 'framer-motion';
 import './sass/main.scss';
 
 // Components
@@ -33,8 +38,8 @@ function App() {
               animate={!prefersReducedMotion && { opacity: 1 }}
             >
               <motion.img
-                transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1.6 }}
-                src={process.env.PUBLIC_URL + `/images/image-2.jpg`}
+                transition={{ ease: easeInOut, duration: 1.6 }}
+                src={process.env.REACT_APP_API_BASE_URL + `/images/image-2.jpg`}
                 layoutId='main-image-1'
               />
             </div>

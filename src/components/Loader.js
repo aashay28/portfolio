@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion, easeInOut } from 'framer-motion';
 
-import Image from "./Image";
+import Image from './Image';
 
 // Import images
 
@@ -19,7 +19,7 @@ const item = {
     opacity: 1,
     y: 0,
     transition: {
-      ease: [0.6, 0.01, -0.05, 0.95],
+      ease: easeInOut,
       duration: 1.6,
     },
   },
@@ -27,7 +27,7 @@ const item = {
     opacity: 0,
     y: -200,
     transition: {
-      ease: "easeInOut",
+      ease: easeInOut,
       duration: 0.8,
     },
   },
@@ -39,33 +39,34 @@ const itemMain = {
     opacity: 1,
     y: 0,
     transition: {
-      ease: [0.6, 0.01, -0.05, 0.95],
+      ease: easeInOut,
       duration: 1.6,
     },
   },
 };
 
+console.log('PUBLIC_URL', process.env.REACT_APP_API_BASE_URL);
 const Loader = ({ setLoading }) => {
   return (
-    <motion.div className="loader">
+    <motion.div className='loader'>
       <motion.div
         variants={container}
         onAnimationComplete={() => setLoading(false)}
-        initial="hidden"
-        animate="show"
-        exit="exit"
-        className="loader-inner"
+        initial='hidden'
+        animate='show'
+        exit='exit'
+        className='loader-inner'
       >
-        <ImageBlock variants={item} id="image-1" />
-        <motion.div variants={itemMain} className="transition-image">
+        <ImageBlock variants={item} id='image-1' />
+        <motion.div variants={itemMain} className='transition-image'>
           <motion.img
-            layoutId="main-image-1"
-            src={process.env.PUBLIC_URL + `/images/image-2.jpg`}
+            layoutId='main-image-1'
+            src={process.env.REACT_APP_API_BASE_URL + `/images/image-2.jpg`}
           />
         </motion.div>
-        <ImageBlock variants={item} id="image-3" />
-        <ImageBlock variants={item} id="image-4" />
-        <ImageBlock variants={item} id="image-5" />
+        <ImageBlock variants={item} id='image-3' />
+        <ImageBlock variants={item} id='image-4' />
+        <ImageBlock variants={item} id='image-5' />
       </motion.div>
     </motion.div>
   );
@@ -82,8 +83,8 @@ export const ImageBlock = ({ posX, posY, variants, id }) => {
       }}
     >
       <Image
-        src={process.env.PUBLIC_URL + `/images/${id}.webp`}
-        fallback={process.env.PUBLIC_URL + `/images/${id}.jpg`}
+        src={process.env.REACT_APP_API_BASE_URL + `/images/${id}.webp`}
+        fallback={process.env.REACT_APP_API_BASE_URL + `/images/${id}.jpg`}
         alt={id}
       />
     </motion.div>

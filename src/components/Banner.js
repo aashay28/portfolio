@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { easeInOut, motion } from 'framer-motion';
 
 const banner = {
   animate: {
@@ -15,7 +15,7 @@ const letterAni = {
   animate: {
     y: 0,
     transition: {
-      ease: [0.6, 0.01, -0.05, 0.95],
+      ease: easeInOut,
       duration: 1,
     },
   },
@@ -31,9 +31,9 @@ const Banner = () => {
   }, []);
   return (
     <motion.div className='banner' variants={banner}>
-      <BannerRowTop title={"brand"} />
-      <BannerRowCenter title={"experience"} playMarquee={playMarquee} />
-      <BannerRowBottom title={"studio"} />
+      <BannerRowTop title={'brand'} />
+      <BannerRowCenter title={'experience'} playMarquee={playMarquee} />
+      <BannerRowBottom title={'studio'} />
     </motion.div>
   );
 };
@@ -43,11 +43,14 @@ const AnimatedLetters = ({ title, disabled }) => (
     className='row-title'
     variants={disabled ? null : banner}
     initial='initial'
-    animate='animate'>
-    {[...title].map((letter) => (
+    animate='animate'
+  >
+    {[...title].map((letter, i) => (
       <motion.span
+        key={i}
         className='row-letter'
-        variants={disabled ? null : letterAni}>
+        variants={disabled ? null : letterAni}
+      >
         {letter}
       </motion.span>
     ))}
@@ -56,7 +59,7 @@ const AnimatedLetters = ({ title, disabled }) => (
 
 const BannerRowTop = ({ title }) => {
   return (
-    <div className={"banner-row"}>
+    <div className={'banner-row'}>
       <div className='row-col'>
         <AnimatedLetters title={title} />
       </div>
@@ -64,11 +67,12 @@ const BannerRowTop = ({ title }) => {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          ease: "easeInOut",
+          ease: 'easeInOut',
           duration: 1,
           delay: 0.4,
         }}
-        className='row-col'>
+        className='row-col'
+      >
         <span className='row-message'>
           We are specialised in setting up the foundation of your brand and
           setting you up for success.
@@ -80,30 +84,33 @@ const BannerRowTop = ({ title }) => {
 
 const BannerRowBottom = ({ title }) => {
   return (
-    <div className={"banner-row center"}>
+    <div className={'banner-row center'}>
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ ease: [0.6, 0.01, -0.05, 0.95], duration: 1, delay: 1 }}
-        className='scroll'>
+        className='scroll'
+      >
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
-            ease: "easeInOut",
+            ease: 'easeInOut',
             duration: 1,
             delay: 1.8,
-          }}>
+          }}
+        >
           scroll
         </motion.span>
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
-            ease: "easeInOut",
+            ease: easeInOut,
             duration: 1,
             delay: 1.8,
-          }}>
+          }}
+        >
           down
         </motion.span>
       </motion.div>
@@ -114,12 +121,13 @@ const BannerRowBottom = ({ title }) => {
 
 const BannerRowCenter = ({ title, playMarquee }) => {
   return (
-    <div className={`banner-row marquee  ${playMarquee && "animate"}`}>
+    <div className={`banner-row marquee  ${playMarquee && 'animate'}`}>
       <motion.div
         initial={{ y: 310 }}
         animate={{ y: 0 }}
         transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1 }}
-        className='marquee__inner'>
+        className='marquee__inner'
+      >
         <AnimatedLetters title={title} disabled />
         <AnimatedLetters title={title} />
         <AnimatedLetters title={title} disabled />
